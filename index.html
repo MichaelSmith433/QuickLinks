@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yatin Links</title>
+    <title>My Links</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,8 +27,8 @@
         }
         .links a {
             text-decoration: none;
-            background: white;
-            color: #ff7e5f;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
             padding: 15px 30px;
             margin: 10px;
             border-radius: 25px;
@@ -36,20 +36,46 @@
             text-align: center;
             font-size: 18px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s, color 0.3s;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
         }
         .links a:hover {
-            background: #ff7e5f;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+        .top-right-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .top-right-buttons a {
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+        }
+        .top-right-buttons a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
+    <div class="top-right-buttons">
+        <a href="https://github.com/MichaelSmith433/QuickLinks" target="_blank">G</a>
+    </div>
     <h1>My Links</h1>
     <div class="links">
         <a href="https://www.youtube.com/@xQcOW/videos" target="_blank">XQC</a>
         <a href="https://binged.in/" target="_blank">Binged</a>
-        <a href="https://www.example3.com" target="_blank">Example Link 3</a>
+        <a href="https://login.questrade.com/" target="_blank">Questrade</a>
         <!-- Add more links as needed -->
     </div>
 </body>
