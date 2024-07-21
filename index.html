@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Links</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -16,16 +18,24 @@
             background: linear-gradient(91.1deg, rgb(57, 31, 105) -2.3%, rgb(115, 43, 155) 44.4%, rgb(231, 75, 184) 103.4%);
             color: white;
         }
+
         h1 {
             margin-bottom: 20px;
+            font-weight: 600;
         }
+
         .links {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
         }
+
         .links a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
             background: rgba(255, 255, 255, 0.2);
             color: white;
@@ -35,13 +45,43 @@
             width: 60%;
             text-align: center;
             font-size: 18px;
+            font-weight: 600;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background 0.3s, color 0.3s, transform 0.3s;
+            overflow: hidden;
         }
+
+        .links a span {
+            position: absolute;
+            bottom: 0;
+            width: 2%;
+            height: 0;
+            background-color: rgba(255, 255, 255, 0.3);
+            transition: height 0.3s ease, top 0.3s ease;
+        }
+
+        .links a.hover span {
+            height: 100%;
+            top: 0;
+        }
+
+        .links a.retract span {
+            height: 0;
+            top: -100%;
+        }
+
         .links a:hover {
             background: rgba(255, 255, 255, 0.4);
             transform: scale(1.05);
         }
+
+        /* Transition durations */
+        ${Array.from({ length: 50 }, (_, i) => `
+        .links a span:nth-child(${i + 1}) {
+            left: ${i * 2}%;
+            transition-duration: ${300 + Math.abs(25 - i) * 40}ms;
+        }`).join('')}
+
         .top-right-buttons {
             position: absolute;
             top: 20px;
@@ -49,6 +89,7 @@
             display: flex;
             gap: 10px;
         }
+
         .top-right-buttons a {
             text-decoration: none;
             background: rgba(255, 255, 255, 0.2);
@@ -61,9 +102,60 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background 0.3s, color 0.3s, transform 0.3s;
         }
+
         .top-right-buttons a:hover {
             background: rgba(255, 255, 255, 0.4);
             transform: scale(1.05);
+        }
+
+        .entertainment-links {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .entertainment-links:hover {
+            transform: scale(1.05);
+        }
+
+        .entertainment-links .row {
+            display: flex;
+            width: 100%;
+            height: 50%;
+        }
+
+        .entertainment-links a {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .entertainment-links a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .entertainment-links .row a:first-child {
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .entertainment-links .row:first-child a {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
@@ -71,12 +163,40 @@
     <div class="top-right-buttons">
         <a href="https://github.com/MichaelSmith433/QuickLinks" target="_blank">G</a>
     </div>
+    <div class="entertainment-links">
+        <div class="row">
+            <a href="https://www.youtube.com/@xQcOW/videos" target="_blank">XQC</a>
+            <a href="https://binged.in/" target="_blank">Binged</a>
+        </div>
+        <div class="row">
+            <a href="https://www.wcofun.net/search" target="_blank">Cartoons</a>
+            <a href="https://the.crackstreams.ws/index/" target="_blank">Crack</a>
+        </div>
+    </div>
     <h1>My Links</h1>
     <div class="links">
-        <a href="https://www.youtube.com/@xQcOW/videos" target="_blank">XQC</a>
-        <a href="https://binged.in/" target="_blank">Binged</a>
         <a href="https://login.questrade.com/" target="_blank">Questrade</a>
-        <!-- Add more links as needed -->
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.links a').forEach(link => {
+                for (let i = 0; i < 50; i++) {
+                    const span = document.createElement('span');
+                    span.style.left = `${i * 2}%`;
+                    span.style.transitionDuration = `${300 + Math.abs(25 - i) * 40}ms`;
+                    link.appendChild(span);
+                }
+                link.addEventListener('mouseenter', () => {
+                    link.classList.add('hover');
+                    link.classList.remove('retract');
+                });
+                link.addEventListener('mouseleave', () => {
+                    link.classList.remove('hover');
+                    link.classList.add('retract');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
